@@ -4,39 +4,10 @@ const front = document.querySelector('.front');
 const back = document.querySelector('.back');
 const left = document.querySelector('.left');
 const right = document.querySelector('.right');
-const reset = document.querySelector('.reset');
 const progressBar = document.querySelector('.progress-bar');
-const titulo = document.querySelector('.titulo');
-const circle = document.querySelector('.circle');
 
 let controlArray = [left, right]
 
-let audio;
-
-let letra;
-
-let tempo = 0;
-
-progressBar.addEventListener('click', (event) => {
-    // if (container.classList.contains('costa')){
-    const posicaoClique = event.offsetX;
-    const larguraBarra = progressBar.offsetWidth;
-    const valor = Math.round((posicaoClique / larguraBarra) * 100);
-    audio.currentTime = (valor * audio.duration) / 100;
-    console.log(audio.currentTime)
-  });
-
-
-
-reset.addEventListener('click', () => {
-    // if (container.classList.contains('costa')){
-    audio.currentTime = 0;
-    // audio.play()
-    tempo = 0;
-// }
-    // container.classList.remove('costa');
-    // audio.play();
-});
 
 song.addEventListener('click', el => {
   let ele = el.target;
@@ -50,6 +21,7 @@ song.addEventListener('click', el => {
 
   if (ele.classList.contains('mateus')) {
     songNumber = 0;
+    console.log(songNumber);
     anime({
       targets: '.song',
       translateX: '255px',
@@ -57,6 +29,7 @@ song.addEventListener('click', el => {
     }); 
   } else if (ele.classList.contains('julliany')) {
     songNumber = 1;
+	console.log(songNumber);
     anime({
       targets: '.song',
       translateX: '0px',
@@ -64,12 +37,14 @@ song.addEventListener('click', el => {
     });
   } else {
     songNumber = 2;
+console.log(songNumber);
     anime({
       targets: '.song',
       translateX: '-255px',
       easing: 'easeOutExpo',
     });
   }
+console.log(songNumber);
 });
 
 
@@ -79,63 +54,29 @@ container.addEventListener('click', () => {
 });
 
 
+// Cria o objeto Audio uma vez e o torna uma variável global
+const audio = new Audio();
+
 function musica() {
     if (container.classList.contains('costa')) {
         if (songNumber === 0){
-        audio = new Audio('./assets/js/music/presenca.mp3');
-        if(letra != 0){
-            audio.currentTime = 0;
+            audio.src = './assets/js/music/presenca.mp3';
+            audio.play();
+        } else if (songNumber === 1) {
+            audio.src = './assets/js/music/você.mp3';
+            audio.play();
         } else {
-        audio.currentTime = tempo;
-    }
-        audio.play();
-        letra = 0;
-        
-audio.addEventListener('timeupdate', function() {
-    const value = (100 / audio.duration) * audio.currentTime;
-    progressBar.value = value;
-    let progresso = value-3;
-    circle.style.margin = '10px ' + progresso + '%';
-  });
-    } else if (songNumber === 1) {
-        audio = new Audio('./assets/js/music/você.mp3');
-        if(letra != 1){
-            audio.currentTime = 0;
-        } else {
-        audio.currentTime = tempo;
-    }
-        audio.play();
-        letra = 1;
-           
-audio.addEventListener('timeupdate', function() {
-    const value = (100 / audio.duration) * audio.currentTime;
-    progressBar.value = value;
-    let progresso = value-3;
-    circle.style.margin = '10px ' + progresso + '%';
-  });
-    } else {
-        audio = new Audio('./assets/js/music/porta.mp3');
-        if(letra != 2){
-            audio.currentTime = 0;
-        } else {
-        audio.currentTime = tempo;
-    }
-        audio.play();
-        letra = 2;
-           
-audio.addEventListener('timeupdate', function() {
-    const value = (100 / audio.duration) * audio.currentTime;
-    progressBar.value = value;
-    let progresso = value-3;
-    circle.style.margin = '10px ' + progresso + '%';
-  });
-    }
+            audio.src = './assets/js/music/porta.mp3';
+            audio.play();
+        }
     } else {
         audio.pause();
-        tempo = audio.currentTime;
-   	progressBar.value = 0;
+        let tempo = audio.currentTime;
+        console.log('tempo:', tempo);
+        audio.currentTime = tempo;
     }
 }
+
 
 controlArray.forEach((control) => {
     control.addEventListener('click', () => {
@@ -227,23 +168,5 @@ function scaleCoverDownPrev() {
         duration: 1500,
     })
 };
-
-document.addEventListener('click', () => {
-if (songNumber === 0) {
-    titulo.style = "opacity: 0%"
-    titulo.innerHTML = ''
-    titulo.innerHTML = `Tua Presença Vale Mais </br> Mateus Brito`
-    titulo.style = "opacity: 100%"
-} else if (songNumber === 1) {
-    titulo.style = "opacity: 0%"
-    titulo.innerHTML = ''
-    titulo.innerHTML = `Eu Tenho Você + Era Eu </br> Julliany Souza ft. Ricardinho`
-    titulo.style = "opacity: 100%"
-} else {
-    titulo.style = "opacity: 0%"
-    titulo.innerHTML = ''
-    titulo.innerHTML = `Batendo à Porta </br> Fhop music`
-    titulo.style = "opacity: 100%"
-}})
 
 
