@@ -139,6 +139,8 @@ body {
     border-radius: 20px;
     height: 100px;
     width: 100px;
+    transition-property: transform, box-shadow;
+    transition-duration: .1s;
 }
 
 .control.right {
@@ -149,6 +151,8 @@ body {
     border-radius: 20px;
     height: 100px;
     width: 100px;
+    transition-property: transform, box-shadow;
+    transition-duration: .1s;
 }
 
 .control.reset {
@@ -159,6 +163,8 @@ body {
     border-radius: 20px;
     height: 100px;
     width: 100px;
+    transition-property: transform, box-shadow;
+    transition-duration: .1s;
 }
 
 .container{
@@ -171,6 +177,8 @@ body {
     width: 100px;
     position: relative;
     perspective: 1000px;
+    transition-property: transform, box-shadow;
+    transition-duration: .1s;
 }
 
 .front, .back{
@@ -182,26 +190,49 @@ body {
     position: absolute;
     backface-visibility: hidden;
     transform-style: preserve-3d;
-    transition: all 1s ease;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+.container:active   {
+    font-size: 1rem;
+    transform: scale(.9);
+    box-shadow: 0 3px 15px -2px;
+  }
+
+  .control.left:active{
+    font-size: 1rem;
+    transform: scale(.9);
+    box-shadow: 0 3px 15px -2px;
+  }
+
+  .control.right:active{
+    font-size: 1rem;
+    transform: scale(.9);
+    box-shadow: 0 3px 15px -2px;
+  } 
+
+  .control.reset:active{
+    font-size: 1rem;
+    transform: scale(.9);
+    box-shadow: 0 3px 15px -2px;
+  }
+
 .front {
-    transform: rotateY(0deg);
+    visibility: visible;
 }
 
 .back {
-    transform: rotateY(-180deg);
+    visibility: hidden;
 }
 
 .container.costa .front {
-    transform: rotateY(180deg);
+    visibility: hidden;
 }
 
 .container.costa .back {
-    transform: rotateY(0deg);
+    visibility: visible;
 } 
 
 ion-icon {
