@@ -23,7 +23,7 @@ progressBar.addEventListener('click', (event) => {
     const larguraBarra = progressBar.offsetWidth;
     const valor = Math.round((posicaoClique / larguraBarra) * 100);
     audio.currentTime = (valor * audio.duration) / 100;
-    console.log(audio.currentTime)
+    tempo = audio.currentTime;
   });
 
 
@@ -93,7 +93,7 @@ function musica() {
         
 audio.addEventListener('timeupdate', function() {
     const value = (100 / audio.duration) * audio.currentTime;
-    progressBar.value = value;
+    progressBar.value = value;  
     let progresso = value-3;
     circle.style.margin = '10px ' + progresso + '%';
   });
